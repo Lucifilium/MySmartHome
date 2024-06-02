@@ -1,0 +1,89 @@
+<!doctype html>
+<html> 
+    <head> 
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link rel="stylesheet" href="Stylesheets/style.css">
+        <title>Device Controls</title> 
+    </head> 
+    <body> 
+        <!---------------------------- Navbar ---------------------------->
+        <nav class="navbar navbar-expand-lg bg-light navbar-light">
+            <div class="container">
+                <a href="/" class="navbar-brand"><strong>MySmartHome UTILITY</strong></a>
+                <ul class="nav nav-pills bg-light navbar-light">
+                    <a class="nav-link" aria-current="page" href="/">Home</a>
+                    <a class="nav-link" href="/devicestatus">Device Status</a>
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Device Settings</a>
+                        <ul class="dropdown-menu">
+                            <a class="dropdown-item" href="/adddevice">Add Device</a>
+                            <a class="dropdown-item" href="/deletedevice">Delete Device</a>
+                            <hr class="dropdown-divider">
+                            <a class="dropdown-item active" href="/control">Controls</a>
+                        </ul>
+                    </div>
+                    
+                    <a class="nav-link" href="/about">About</a>
+                </ul>
+            </div>
+        </nav>
+
+        <h1 class="headers"> This is the Control page </h1> 
+        <p class="headers">Update your device settings here!</p>
+        
+        <!---------------------------- Update devices ---------------------------->
+        <% availabledevices.forEach(function(device){ %> 
+            <form method="POST" action="/deviceupdated">
+                <table class="controlTable"> 
+                    <thead> 
+                        <tr>
+                            <th style="visibility: hidden;"></th>
+                            <th>Name</th> 
+                            <th>Type</th> 
+                            <th>Status</th>
+                            <th>Temperature</th> 
+                            <th>Volume</th> 
+                            <th>Speed</th> 
+                        </tr> 
+                    </thead> 
+                    <tbody>
+                        <tr>
+                            <td style="visibility: hidden;"><input type="hidden" name="id" value="<%= device.id %>"></td>
+                            <td><input type="text" name="name" maxlength="15" required value="<%= device.name %>"></td>
+                            <td><input type="text" name="type" value="<%= device.type %>" readonly></td>
+                            <td><input type="number" name="status" min="0" max="1" required value="<%= device.status %>"></td>
+
+                            <!-- If temperature is null, disable input -->
+                            <% if(device.temperature == null){ %>
+                                <td><input type="number" name="temperature" min="-20" max="34" disabled value="<%= device.temperature %>"></td>
+                            <% } else { %>
+                                <td><input type="number" name="temperature" min="-20" max="34" value="<%= device.temperature %>"></td>
+                            <% } %>
+
+                            <!-- If volume is null, disable input -->
+                            <% if(device.volume == null){ %>
+                                <td><input type="number" name="volume" min="0" max="99" disabled value="<%= device.volume %>"></td>
+                            <% } else { %>
+                                <td><input type="number" name="volume" min="0" max="99" value="<%= device.volume %>"></td>
+                            <% } %>
+
+                            <!-- If speed is null, disable input -->
+                            <% if(device.speed == null){ %>
+                                <td><input type="number" name="speed" min="0" max="3" disabled value="<%= device.speed %>"></td>
+                            <% } else { %>
+                                <td><input type="number" name="speed" min="0" max="3" value="<%= device.speed %>"></td>
+                            <% } %>
+                        </tr>
+                    </tbody>
+                </table>
+                <input class="alignBtn" type="submit" value="Update" />
+            </form>
+            <br>
+        <% }) %>
+        <a href="/devicestatus" class="alignBtn">View all the devices</a>
+
+        
+       
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    </body> 
+</html>

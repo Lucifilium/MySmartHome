@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link rel="stylesheet" href="Stylesheets/style.css">
+        <title>Device Status</title>
+    </head>
+    <body>
+        <!---------------------------- Navbar ---------------------------->
+        <nav class="navbar navbar-expand-lg bg-light navbar-light">
+            <div class="container">
+                <a href="/" class="navbar-brand"><strong>MySmartHome UTILITY</strong></a>
+                <ul class="nav nav-pills bg-light navbar-light">
+                    <a class="nav-link" aria-current="page" href="/">Home</a>
+                    <a class="nav-link active" href="/devicestatus">Device Status</a>
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Device Settings</a>
+                        <ul class="dropdown-menu">
+                            <a class="dropdown-item" href="/adddevice">Add Device</a>
+                            <a class="dropdown-item" href="/deletedevice">Delete Device</a>
+                            <hr class="dropdown-divider">
+                            <a class="dropdown-item" href="/control">Controls</a>
+                        </ul>
+                    </div>
+                    
+                    <a class="nav-link" href="/about">About</a>
+                </ul>
+            </div>
+        </nav>
+
+        <style>
+            
+        </style>
+        <h1 class="headers"> Your Device Status </h1>
+        <h3 class="headers">You can see names and status of all available devices here</h3>
+
+        <!---------------------------- List of all devices ---------------------------->
+        <table class="statusTable">
+            <tr class="statusTable"> 
+                <th class="statusTable">ID</th>
+                <th class="statusTable">Name</th> 
+                <th class="statusTable">Type</th>
+                <th class="statusTable">Status</th> 
+                <th class="statusTable">Volume</th> 
+                <th class="statusTable">Temperature</th>
+                <th class="statusTable">Speed</th>
+            </tr> 
+            <% availabledevices.forEach(function(device){ %>
+            <tr class="statusTable">
+                <td class="statusTable"><%= device.id %></td>
+                <td class="statusTable"><%= device.name %></td>
+                <td class="statusTable"><%= device.type %></td>
+                <td class="statusTable"><%= device.status %></td>
+                <td class="statusTable"><%= device.volume %></td>
+                <td class="statusTable"><%= device.temperature %></td>
+                <td class="statusTable"><%= device.speed %></td>
+            </tr>
+            <% }) %>
+        </table>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    </body>
+</html>

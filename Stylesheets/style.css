@@ -1,0 +1,42 @@
+body {
+    background: #919191;
+    color: #ffffff;
+}
+
+.headers {
+    text-align: center;
+    padding-top: 30px;
+}
+
+.statusTable {
+    border:1px solid #d1d1d1;
+    width: 30%;
+    margin: auto;
+    padding: 15px;
+    text-align: center;
+}
+
+.controlTable, tr, th, td {
+    border:1px solid #d1d1d1;
+    text-align: center;
+    margin-left: 23%;
+    columns: 100px;
+}
+
+.alignBtn {
+    margin-left: 28.31%;
+}
+
+.deleteForm {
+    text-align: center;
+}
+
+.addForm {
+    text-align: center;
+    position: relative;
+}
+
+input[id="info"] {
+    width: 5%;
+    margin-right: 10px;
+}
